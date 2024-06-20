@@ -1,8 +1,8 @@
-import NavBar from "../NavBar/NavBar";
+import Navigation from "../Navigation/Navigation";
 
 const Header = () => {
     return(
-        <NavBar />
+        <Navigation />
     )
 }
 
