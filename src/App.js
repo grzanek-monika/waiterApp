@@ -1,9 +1,10 @@
+import { Container } from "react-bootstrap";
 
 function App() {
   return (
-    <div className="App">
-      
-    </div>
+    <Container>
+      <h2>Hello World!</h2>
+    </Container>
   );
 }
 
