@@ -13,7 +13,8 @@ import { fetchTables } from "./redux/tablesReducer";
 const App = () => {
 
   const dispatch = useDispatch();
-  useEffect(() => fetchTables(dispatch), [dispatch]);
+
+  useEffect(() => dispatch(fetchTables()), [dispatch]);
 
   return (
     <Container>

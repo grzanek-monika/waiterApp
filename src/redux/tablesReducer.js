@@ -1,10 +1,7 @@
+import { API_URL } from "../config";
+
 //selectors
-export const url = 'http://localhost:3131/api/tables';
-export const fetchTables = dispatch => {
-  fetch('http://localhost:3131/api/tables')
-    .then(res => res.json())
-    .then(tables => dispatch(updateTables(tables)));
-}
+
 
 // actions
 const createActionName = actionName => `app/tables/${actionName}`;
@@ -21,6 +18,13 @@ const tablesReducer = (statePart = [], action) => {
 };
 
 export const updateTables = payload => ({type: UPDATE_TABLES, payload});
+export const fetchTables = () => {
+  return (dispatch) => {
+    fetch(API_URL + '/tables')
+      .then(res => res.json())
+      .then(tables => dispatch(updateTables(tables)));
+  }
+}
 
 
 export default tablesReducer;
