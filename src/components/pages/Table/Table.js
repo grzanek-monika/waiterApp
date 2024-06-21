@@ -1,9 +1,10 @@
 import { Container } from "react-bootstrap";
+import SingleTable from "../../features/SingleTable/SingleTable";
 
 const Table = () => {
     return(
         <Container>
-            <h2>Table</h2>
+            <SingleTable />
         </Container>
     )
 }

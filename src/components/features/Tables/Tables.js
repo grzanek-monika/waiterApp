@@ -2,8 +2,6 @@ import { Container, ListGroup, Button } from "react-bootstrap";
 import { getAllTables } from "../../../redux/tablesReducer";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { useParams } from "react-router-dom";
-
 
 const Tables = () => {
     const tables = useSelector(getAllTables);
