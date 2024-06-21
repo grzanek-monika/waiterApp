@@ -1,6 +1,8 @@
 import { Container, ListGroup, Button } from "react-bootstrap";
 import { getAllTables } from "../../../redux/tablesReducer";
 import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 
 const Tables = () => {
@@ -16,7 +18,7 @@ const Tables = () => {
                             <b className="m-2">Status: </b> {table.status}
                         </div>
                         <div>
-                            <Button variant="primary">Show more</Button>
+                            <Button as={NavLink} to={`/table/${table.id}`} variant="primary">Show more</Button>
                         </div>
                     </ListGroup.Item >)}
             </ListGroup>
