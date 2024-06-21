@@ -5,8 +5,16 @@ import Home from "./components/pages/Home";
 import Table from "./components/pages/Table";
 import NotFound from "./components/views/NotFound/NotFound";
 import Footer from "./components/views/Footer/Footer";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+//import { url } from "./redux/tablesReducer";
+import { fetchTables } from "./redux/tablesReducer";
 
-function App() {
+const App = () => {
+
+  const dispatch = useDispatch();
+  useEffect(() => fetchTables(dispatch), [dispatch]);
+
   return (
     <Container>
       <Header /> 
