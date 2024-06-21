@@ -1,6 +1,7 @@
 import { API_URL } from "../config";
 
 //selectors
+export const getAllTables = (state => state.tables);
 
 
 // actions
