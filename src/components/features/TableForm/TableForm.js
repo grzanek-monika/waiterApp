@@ -12,7 +12,9 @@ const TableForm = props => {
         <Container>
             <Form className="m-4 p-2">
                 <Form.Group className="d-flex">
-                    <Form.Label className="m-2"><b>Status: </b></Form.Label>
+                    <Form.Label className="m-2">
+                        <b>Status: </b>
+                    </Form.Label>
                     <Form.Select 
                         id='statusSelect'
                         style={{width: '25%'}}
@@ -22,16 +24,38 @@ const TableForm = props => {
                     </Form.Select>
                 </Form.Group>
                 <Form.Group className="d-flex align-items-center">
-                    <Form.Label className="m-2"><b>People: </b></Form.Label>
+                    <Form.Label className="m-2">
+                        <b>People: </b>
+                    </Form.Label>
                     <div className="d-flex align-items-center">
-                        <Form.Control className="m-2" style={{width: '9%'}} value={peopleAmount} onChange={e => setPeopleAmount(e.target.value)}></Form.Control> 
+                        <Form.Control 
+                            type="number" 
+                            className="m-2" 
+                            style={{width: '15%'}} 
+                            value={peopleAmount} 
+                            onChange={e => setPeopleAmount(e.target.value)}>
+                        </Form.Control> 
                         / 
-                        <Form.Control className="m-2" style={{width: '9%'}} value={maxPeopleAmount} onChange={e => setMaxPeopleAmount(e.target.value)}></Form.Control>
+                        <Form.Control 
+                            type="number" 
+                            className="m-2" 
+                            style={{width: '15%'}} 
+                            value={maxPeopleAmount} 
+                            onChange={e => setMaxPeopleAmount(e.target.value)}>
+                        </Form.Control>
                     </div>
                 </Form.Group>
                 <Form.Group className="d-flex align-items-center">
-                    <Form.Label className="m-2"><b>Bill: </b><span className="m-1">$</span></Form.Label>
-                    <Form.Control style={{width: '5%'}} value={bill} onChange={e => setBill(e.target.value)}></Form.Control>
+                    <Form.Label className="m-2">
+                        <b>Bill: </b>
+                        <span className="m-1">$</span>
+                    </Form.Label>
+                    <Form.Control 
+                        type="number" 
+                        style={{width: '10%'}} 
+                        value={bill} 
+                        onChange={e => setBill(e.target.value)}>
+                    </Form.Control>
                 </Form.Group>
             </Form>
         </Container>
