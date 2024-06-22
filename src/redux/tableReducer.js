@@ -3,7 +3,7 @@ import { API_URL } from "../config";
 //selectors
 export const getAllTables = (state => state.tables);
 export const getTableById = ({tables}, id) => tables.find(table => table.id === id);
-
+export const tableStatuses = ['Busy', 'Reserved', 'Free', 'Cleaning'];
 
 // actions
 const createActionName = actionName => `app/tables/${actionName}`;

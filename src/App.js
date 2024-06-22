@@ -7,8 +7,7 @@ import NotFound from "./components/pages/NotFound/NotFound";
 import Footer from "./components/views/Footer/Footer";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-//import { url } from "./redux/tablesReducer";
-import { fetchTables } from "./redux/tablesReducer";
+import { fetchTables } from "./redux/tableReducer";
 
 const App = () => {
 
