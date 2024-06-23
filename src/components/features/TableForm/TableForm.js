@@ -1,17 +1,31 @@
-import { Container, Form } from "react-bootstrap";
+import { Container, Form, Button } from "react-bootstrap";
 import PropTypes from "prop-types";
 import { useState } from "react";
-import { tableStatuses } from "../../../redux/tableReducer";
+import { tableStatuses, editTable } from "../../../redux/tableReducer";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 
-const TableForm = props => {
+const TableForm = ({id,  ...props}) => {
     const [status, setStatus] = useState(props.status);
     const [peopleAmount, setPeopleAmount] = useState(props.peopleAmount)
     const [maxPeopleAmount, setMaxPeopleAmount] = useState(props.maxPeopleAmount);
     const [bill, setBill] = useState(props.bill);
+
+    const { register, handleSubmit, formState: { errors } } = useForm(); 
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    
+    const edit = () => {
+        dispatch(editTable({status, peopleAmount, maxPeopleAmount, bill, id}));  
+        navigate('/');
+    }
+
     return(
         <Container>
-            <Form className="m-4 p-2">
-                <Form.Group className="d-flex">
+            <Form className="m-4 p-2" onSubmit={handleSubmit(edit)} >
+                <Form.Group className="d-flex mt-2">
                     <Form.Label className="m-2">
                         <b>Status: </b>
                     </Form.Label>
@@ -23,7 +37,7 @@ const TableForm = props => {
                         {tableStatuses.map(tableStatus => <option value={tableStatus}>{tableStatus}</option>)}
                     </Form.Select>
                 </Form.Group>
-                <Form.Group className="d-flex align-items-center">
+                <Form.Group className="d-flex align-items-center mt-2">
                     <Form.Label className="m-2">
                         <b>People: </b>
                     </Form.Label>
@@ -45,7 +59,7 @@ const TableForm = props => {
                         </Form.Control>
                     </div>
                 </Form.Group>
-                <Form.Group className="d-flex align-items-center">
+                <Form.Group className="d-flex align-items-center mt-2">
                     <Form.Label className="m-2">
                         <b>Bill: </b>
                         <span className="m-1">$</span>
@@ -57,6 +71,12 @@ const TableForm = props => {
                         onChange={e => setBill(e.target.value)}>
                     </Form.Control>
                 </Form.Group>
+                <Button 
+                    variant="primary" 
+                    type="submit" 
+                    className="mt-4">
+                    Update
+                </Button>
             </Form>
         </Container>
     )
