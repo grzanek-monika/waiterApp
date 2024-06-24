@@ -1,7 +1,7 @@
 import { Container, Form, Button } from "react-bootstrap";
 import PropTypes from "prop-types";
 import { useState } from "react";
-import { tableStatuses, editTable } from "../../../redux/tableReducer";
+import { tableStatuses } from "../../../redux/tableReducer";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
@@ -44,20 +44,30 @@ const TableForm = ({id,  ...props}) => {
                     </Form.Label>
                     <div className="d-flex align-items-center">
                         <Form.Control 
+                            {...register("peopleAmount", { min: 0, max: 10 })}
                             type="number" 
                             className="m-2" 
                             style={{width: '15%'}} 
                             value={peopleAmount} 
-                            onChange={e => setPeopleAmount(e.target.value)}>
-                        </Form.Control> 
+                            onChange={e => setPeopleAmount(e.target.value)} />
+                        {errors.peopleAmount 
+                            && <small className="d-block form-text text-danger mt-2">
+                                Value must be between 0 and 10
+                                </small>
+                        }
                         / 
                         <Form.Control 
+                            {...register("maxPeopleAmount", {min: 0, max: 10})}
                             type="number" 
                             className="m-2" 
                             style={{width: '15%'}} 
                             value={maxPeopleAmount} 
-                            onChange={e => setMaxPeopleAmount(e.target.value)}>
-                        </Form.Control>
+                            onChange={e => setMaxPeopleAmount(e.target.value)} />
+                        {errors.maxPeopleAmount 
+                            && <small className="d-block form-text text-danger mt-2" >
+                                Value must be between 0 and 10
+                                </small>
+                        }
                     </div>
                 </Form.Group>
                 <Form.Group className="d-flex align-items-center mt-2">
@@ -66,11 +76,16 @@ const TableForm = ({id,  ...props}) => {
                         <span className="m-1">$</span>
                     </Form.Label>
                     <Form.Control 
+                        {...register("bill", {min: 0 })}
                         type="number" 
                         style={{width: '10%'}} 
                         value={bill} 
-                        onChange={e => setBill(e.target.value)}>
-                    </Form.Control>
+                        onChange={e => setBill(e.target.value)} />
+                    {errors.bill 
+                            && <small className="d-block form-text text-danger mt-2" >
+                                Min value is 0
+                                </small>
+                    }
                 </Form.Group>
                 <Button 
                     variant="primary" 
