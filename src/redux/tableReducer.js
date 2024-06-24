@@ -32,5 +32,19 @@ export const fetchTables = () => {
   }
 }
 
+export const editTableRequest = (newTable) => {
+  return (dispatch) => {
+    const options = {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(newTable)
+  };
+  fetch(`${API_URL}/tables/${newTable.id}`, options)
+    .then(() => dispatch(editTable(newTable)));
+  };
+}
+
 
 export default tablesReducer;

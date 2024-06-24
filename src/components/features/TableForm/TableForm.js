@@ -5,6 +5,7 @@ import { tableStatuses, editTable } from "../../../redux/tableReducer";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
+import { editTableRequest } from "../../../redux/tableReducer";
 
 const TableForm = ({id,  ...props}) => {
     const [status, setStatus] = useState(props.status);
@@ -18,7 +19,7 @@ const TableForm = ({id,  ...props}) => {
     const navigate = useNavigate();
     
     const edit = () => {
-        dispatch(editTable({status, peopleAmount, maxPeopleAmount, bill, id}));  
+        dispatch(editTableRequest({status, peopleAmount, maxPeopleAmount, bill, id}));  
         navigate('/');
     }
 
