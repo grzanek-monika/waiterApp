@@ -43,6 +43,12 @@ const TableForm = ({id,  ...props}) => {
         }
     }, [status]);
 
+    useEffect(() => {
+        if(peopleAmount > maxPeopleAmount){
+            setPeopleAmount(maxPeopleAmount);
+        }
+    }, [peopleAmount])
+
     return(
         <Container>
             <Form className="m-4 p-2" onSubmit={handleSubmit(edit)} >
