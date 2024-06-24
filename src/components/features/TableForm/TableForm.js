@@ -6,12 +6,14 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { editTableRequest } from "../../../redux/tableReducer";
+import { useEffect } from "react";
 
 const TableForm = ({id,  ...props}) => {
     const [status, setStatus] = useState(props.status);
     const [peopleAmount, setPeopleAmount] = useState(props.peopleAmount)
     const [maxPeopleAmount, setMaxPeopleAmount] = useState(props.maxPeopleAmount);
     const [bill, setBill] = useState(props.bill);
+    const [viewBill, setViewBill] = useState(false);
 
     const { register, handleSubmit, formState: { errors } } = useForm(); 
 
@@ -22,6 +24,24 @@ const TableForm = ({id,  ...props}) => {
         dispatch(editTableRequest({status, peopleAmount, maxPeopleAmount, bill, id}));  
         navigate('/');
     }
+
+    useEffect(() => {
+        if(status !== "Busy")
+            setViewBill(false)
+    }, [status]);
+
+    useEffect(() => {
+        if(status === "Busy") {
+            setBill(0);
+            setViewBill(true)
+        } 
+        if(status !== "Busy") { 
+            setViewBill(false);
+        }
+        if(status === "Free" || status === "Cleaning") {
+            setPeopleAmount(0);
+        }
+    }, [status]);
 
     return(
         <Container>
@@ -70,7 +90,7 @@ const TableForm = ({id,  ...props}) => {
                         }
                     </div>
                 </Form.Group>
-                <Form.Group className="d-flex align-items-center mt-2">
+                {viewBill && <Form.Group className="d-flex align-items-center mt-2">
                     <Form.Label className="m-2">
                         <b>Bill: </b>
                         <span className="m-1">$</span>
@@ -86,7 +106,7 @@ const TableForm = ({id,  ...props}) => {
                                 Min value is 0
                                 </small>
                     }
-                </Form.Group>
+                </Form.Group>}
                 <Button 
                     variant="primary" 
                     type="submit" 
