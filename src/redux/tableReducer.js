@@ -4,7 +4,7 @@ import { API_URL } from "../config";
 export const getAllTables = (state => state.tables.data);
 export const getTableById = ({tables}, id) => tables.data.find(table => table.id === id);
 export const tableStatuses = ['Busy', 'Reserved', 'Free', 'Cleaning'];
-export const getPending = ({tables}) => tables.pending;
+export const getPending = (state => state.tables.pending);
 
 // actions
 const createActionName = actionName => `app/tables/${actionName}`;

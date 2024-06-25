@@ -137,7 +137,8 @@ const TableForm = ({id,  ...props}) => {
 }
 
 TableForm.propTypes = {
-    props: PropTypes.object.isRequired
+    props: PropTypes.object.isRequired,
+    id: PropTypes.string.isRequired
 }
 
 export default TableForm;
