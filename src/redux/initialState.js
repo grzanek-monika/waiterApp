@@ -1,5 +1,8 @@
 const initialState = {
-    tables: []
+    tables: {
+        data: [],
+        pending: false
+    }  
 }
 
 

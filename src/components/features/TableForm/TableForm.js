@@ -47,7 +47,19 @@ const TableForm = ({id,  ...props}) => {
         if(peopleAmount > maxPeopleAmount){
             setPeopleAmount(maxPeopleAmount);
         }
-    }, [peopleAmount])
+        if(peopleAmount < 0) {
+            setPeopleAmount(0);
+        }
+        if(maxPeopleAmount < 0) {
+            return setMaxPeopleAmount(0);
+        }
+    }, [peopleAmount, maxPeopleAmount]);
+
+    useEffect(() => {
+        if(bill < 0) {
+            setBill(0);
+        }
+    }, [bill]);
 
     return(
         <Container>
@@ -71,10 +83,10 @@ const TableForm = ({id,  ...props}) => {
                     <div className="d-flex align-items-center">
                         <Form.Control 
                             {...register("peopleAmount", { min: 0, max: 10 })}
-                            type="number" 
+                            type="number"
                             className="m-2" 
                             style={{width: '15%'}} 
-                            value={peopleAmount} 
+                            value={parseInt(peopleAmount)} 
                             onChange={e => setPeopleAmount(e.target.value)} />
                         {errors.peopleAmount 
                             && <small className="d-block form-text text-danger mt-2">
