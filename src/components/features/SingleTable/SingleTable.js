@@ -13,7 +13,7 @@ const SingleTable = () => {
     if(!table) return <Navigate to='/' />
     else return(
         <Container className="m-4 p-2">
-            <h2>Table {table.id}</h2>
+            <h2>Table {table.nr}</h2>
             {loader && <Loader />}
             {!loader && <TableForm {...table} id={id} />}      
         </Container>

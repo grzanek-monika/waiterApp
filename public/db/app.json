@@ -2,6 +2,7 @@
   "tables": [
     {
       "id": "1",
+      "nr": 1,
       "status": "Free",
       "peopleAmount": 0,
       "maxPeopleAmount": 4,
@@ -9,6 +10,7 @@
     },
     {
       "id": "2",
+      "nr": 2,
       "status": "Cleaning",
       "peopleAmount": 0,
       "maxPeopleAmount": 2,
@@ -16,6 +18,7 @@
     },
     {
       "id": "3",
+      "nr": 3,
       "status": "Busy",
       "peopleAmount": "",
       "maxPeopleAmount": 2,
@@ -23,6 +26,7 @@
     },
     {
       "id": "4",
+      "nr": 4,
       "status": "Reserved",
       "peopleAmount": "1",
       "maxPeopleAmount": 4,

@@ -26,11 +26,6 @@ const TableForm = ({id,  ...props}) => {
     }
 
     useEffect(() => {
-        if(status !== "Busy")
-            setViewBill(false)
-    }, [status]);
-
-    useEffect(() => {
         if(status === "Busy") {
             setBill(0);
             setViewBill(true)

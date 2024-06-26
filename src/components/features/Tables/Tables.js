@@ -17,7 +17,7 @@ const Tables = () => {
                 {tables.map(table => 
                     <ListGroup.Item className="d-flex align-items-center justify-content-between" key={table.id} {...table} >
                         <div className="d-flex align-items-center">
-                            <h2 className="m-4">{`Table ${table.id}`} </h2>
+                            <h2 className="m-4">{`Table ${table.nr}`} </h2>
                             <b className="m-2">Status: </b> {table.status}
                         </div>
                         <div>

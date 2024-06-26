@@ -5,8 +5,11 @@ const Navigation = () => {
     return(
         <Navbar bg="primary" data-bs-theme="dark" className="m-4 rounded">
             <Container>
-                <Navbar.Brand>WaiterApp</Navbar.Brand>
-                <Nav.Link as={NavLink} to='/' className="text-white">Home</Nav.Link>
+                <Navbar.Brand className="font-weight-bold">WaiterApp</Navbar.Brand>
+                <div className="d-flex justify-content-end">
+                    <Nav.Link as={NavLink} to='/' className="text-white p-3">Home</Nav.Link>
+                    <Nav.Link as={NavLink} to='/table/add-table' className="text-white p-3">Add table</Nav.Link>
+                </div>
             </Container>
         </Navbar>
     )
