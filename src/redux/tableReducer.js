@@ -1,4 +1,5 @@
 import { API_URL } from "../config";
+import { nanoid } from "nanoid";
 
 //selectors
 export const getAllTables = (state => state.tables.data);
@@ -11,6 +12,7 @@ const createActionName = actionName => `app/tables/${actionName}`;
 const UPDATE_TABLES = createActionName('UPDATE_TABLES');
 const EDIT_TABLE = createActionName('EDIT_TABLE');
 const UPDATE_PENDING = createActionName('UPDATE_PENDING');
+const ADD_TABLE = createActionName('ADD_TABLE');
 
 // action creators
 const tablesReducer = (statePart = [], action) => {
@@ -20,7 +22,9 @@ const tablesReducer = (statePart = [], action) => {
     case EDIT_TABLE: 
       return {...statePart, data: statePart.data.map(table => (table.id === action.payload.id ? {...table, ...action.payload} : table))};
     case UPDATE_PENDING: 
-    return {...statePart, pending: action.payload}
+      return {...statePart, pending: action.payload};
+    case ADD_TABLE: 
+      return {...statePart, data: [...statePart.data, {id: nanoid(), ...action.payload }]}
       default:
       return statePart;
   };
@@ -29,11 +33,12 @@ const tablesReducer = (statePart = [], action) => {
 export const updateTables = payload => ({type: UPDATE_TABLES, payload});
 export const editTable = payload => ({ type: EDIT_TABLE, payload });
 export const updatePending = payload => ({ type: UPDATE_PENDING, payload });
+export const addTable = payload => ({ type: ADD_TABLE, payload });
 
 export const fetchTables = () => {
   return (dispatch) => {
     dispatch(updatePending(true));
-    fetch(API_URL + '/tables')
+    fetch(`${API_URL}/tables`)
       .then(res => res.json())
       .then(tables => {
         dispatch(updateTables(tables));
@@ -58,6 +63,24 @@ export const editTableRequest = (newTable) => {
       dispatch(updatePending(false));
     });
   };
+}
+
+export const addTableRequest = (newTable) => {
+  return (dispatch) => {
+    dispatch(updatePending(true));
+    const options = {
+      method: 'POST', 
+      headers: {
+        'Content-Type': 'application/json'
+      }, 
+      body: JSON.stringify(newTable)
+    };
+    fetch(`${API_URL}/tables`, options)
+      .then(() => {
+        dispatch(addTable(newTable));
+        dispatch(updatePending(false));
+      })
+  }
 }
 
 

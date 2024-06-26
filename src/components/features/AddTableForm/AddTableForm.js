@@ -1,16 +1,17 @@
-import { Container, Form } from "react-bootstrap";
-import { useState } from "react";
+import { Container } from "react-bootstrap";
+import TableForm from "../TableForm/TableForm";
+import { addTableRequest } from "../../../redux/tableReducer";
+import { useDispatch } from "react-redux";
 
 const AddTableForm = () => {
-    const [nr, setNr] = useState('');
+
+    const dispatch = useDispatch();
+    const add = table => {
+        dispatch(addTableRequest(table));
+    }
     return(
         <Container>
-            <Form>
-                <Form.Group>
-                    <Form.Label>Table number: </Form.Label>
-                    <Form.Control />
-                </Form.Group>
-            </Form>
+            <TableForm action={add} actionText='Add table' />
         </Container>
     )
 }

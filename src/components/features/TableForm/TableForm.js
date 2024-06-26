@@ -3,25 +3,25 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import { tableStatuses } from "../../../redux/tableReducer";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+//import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { editTableRequest } from "../../../redux/tableReducer";
 import { useEffect } from "react";
 
-const TableForm = ({id,  ...props}) => {
-    const [status, setStatus] = useState(props.status);
-    const [peopleAmount, setPeopleAmount] = useState(props.peopleAmount)
-    const [maxPeopleAmount, setMaxPeopleAmount] = useState(props.maxPeopleAmount);
-    const [bill, setBill] = useState(props.bill);
+const TableForm = ({id, action, actionText,  ...props}) => {
+    const [nr, setNr] = useState(props.nr || '');
+    const [status, setStatus] = useState(props.status || '');
+    const [peopleAmount, setPeopleAmount] = useState(props.peopleAmount || '')
+    const [maxPeopleAmount, setMaxPeopleAmount] = useState(props.maxPeopleAmount || '');
+    const [bill, setBill] = useState(props.bill || '');
     const [viewBill, setViewBill] = useState(false);
 
     const { register, handleSubmit, formState: { errors } } = useForm(); 
 
-    const dispatch = useDispatch();
+    //const dispatch = useDispatch();
     const navigate = useNavigate();
     
-    const edit = () => {
-        dispatch(editTableRequest({status, peopleAmount, maxPeopleAmount, bill, id}));  
+    const update = () => {
+        action({nr, status, peopleAmount, maxPeopleAmount, bill, id});  
         navigate('/');
     }
 
@@ -58,7 +58,16 @@ const TableForm = ({id,  ...props}) => {
 
     return(
         <Container>
-            <Form className="m-4 p-2" onSubmit={handleSubmit(edit)} >
+            <Form className="m-4 p-2" onSubmit={handleSubmit(update)} >
+            <Form.Group className="mt-2 d-flex align-items-center">
+                    <Form.Label><b>Table number: </b></Form.Label>
+                    <Form.Control 
+                    type="number"
+                    className="m-2" 
+                    style={{width: '15%'}} 
+                    value={nr} 
+                    onChange={e => setNr(e.target.value)} />
+                </Form.Group>
                 <Form.Group className="d-flex mt-2">
                     <Form.Label className="m-2">
                         <b>Status: </b>
@@ -124,7 +133,7 @@ const TableForm = ({id,  ...props}) => {
                     variant="primary" 
                     type="submit" 
                     className="mt-4">
-                    Update
+                    {actionText}
                 </Button>
             </Form>
         </Container>
@@ -133,7 +142,9 @@ const TableForm = ({id,  ...props}) => {
 
 TableForm.propTypes = {
     props: PropTypes.object.isRequired,
-    id: PropTypes.string.isRequired
+    id: PropTypes.string.isRequired,
+    action: PropTypes.func.isRequired,
+    actionText: PropTypes.string.isRequired
 }
 
 export default TableForm;

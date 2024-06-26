@@ -3,10 +3,10 @@
     {
       "id": "1",
       "nr": 1,
-      "status": "Free",
-      "peopleAmount": 0,
+      "status": "Reserved",
+      "peopleAmount": "2",
       "maxPeopleAmount": 4,
-      "bill": 0
+      "bill": ""
     },
     {
       "id": "2",
@@ -31,6 +31,54 @@
       "peopleAmount": "1",
       "maxPeopleAmount": 4,
       "bill": 0
+    },
+    {
+      "nr": "5",
+      "status": "Reserved",
+      "peopleAmount": "3",
+      "maxPeopleAmount": "4",
+      "bill": "",
+      "id": "Jt9dtDu"
+    },
+    {
+      "nr": "6",
+      "status": "Free",
+      "peopleAmount": 0,
+      "maxPeopleAmount": "5",
+      "bill": "",
+      "id": "dbz_Rl8"
+    },
+    {
+      "nr": "7",
+      "status": "Cleaning",
+      "peopleAmount": 0,
+      "maxPeopleAmount": "3",
+      "bill": "",
+      "id": "RzqUh-c"
+    },
+    {
+      "nr": "8",
+      "status": "Cleaning",
+      "peopleAmount": 0,
+      "maxPeopleAmount": "3",
+      "bill": "",
+      "id": "bEwoQL9"
+    },
+    {
+      "nr": "2",
+      "status": "Busy",
+      "peopleAmount": "4",
+      "maxPeopleAmount": "4",
+      "bill": 0,
+      "id": "fv5FamI"
+    },
+    {
+      "nr": "10",
+      "status": "Cleaning",
+      "peopleAmount": 0,
+      "maxPeopleAmount": "4",
+      "bill": "",
+      "id": "cbliZF2"
     }
   ]
 }
