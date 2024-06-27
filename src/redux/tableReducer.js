@@ -13,6 +13,7 @@ const UPDATE_TABLES = createActionName('UPDATE_TABLES');
 const EDIT_TABLE = createActionName('EDIT_TABLE');
 const UPDATE_PENDING = createActionName('UPDATE_PENDING');
 const ADD_TABLE = createActionName('ADD_TABLE');
+const REMOVE_TABLE = createActionName('REMOVE_TABLE');
 
 // action creators
 const tablesReducer = (statePart = [], action) => {
@@ -24,8 +25,10 @@ const tablesReducer = (statePart = [], action) => {
     case UPDATE_PENDING: 
       return {...statePart, pending: action.payload};
     case ADD_TABLE: 
-      return {...statePart, data: [...statePart.data, {id: nanoid(), ...action.payload }]}
-      default:
+      return {...statePart, data: [...statePart.data, {id: nanoid(), ...action.payload }]};
+    case REMOVE_TABLE:
+      return {...statePart, data: statePart.data.filter(table => table.id !== action.payload )};
+    default:
       return statePart;
   };
 };
@@ -34,6 +37,7 @@ export const updateTables = payload => ({type: UPDATE_TABLES, payload});
 export const editTable = payload => ({ type: EDIT_TABLE, payload });
 export const updatePending = payload => ({ type: UPDATE_PENDING, payload });
 export const addTable = payload => ({ type: ADD_TABLE, payload });
+export const removeTable = payload => ({ type: REMOVE_TABLE, payload });
 
 export const fetchTables = () => {
   return (dispatch) => {
@@ -78,6 +82,24 @@ export const addTableRequest = (newTable) => {
     fetch(`${API_URL}/tables`, options)
       .then(() => {
         dispatch(addTable(newTable));
+        dispatch(updatePending(false));
+      })
+  }
+}
+
+export const removeTableRequest = (tableId) => {
+  return(dispatch) => {
+    dispatch(updatePending(true));
+    const options = {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }, 
+      body: JSON.stringify(tableId)
+    }
+    fetch(`${API_URL}/tables/${tableId.id}`, options)
+      .then(() => {
+        dispatch(removeTable(tableId));
         dispatch(updatePending(false));
       })
   }
